@@ -14,7 +14,20 @@ describe('hand-of-resources routes', () => {
   });
 
   it('should be able to insert an instance of Movie to movies', async () => {
-
+    const res = await request(app)
+      .post('/api/v1/movies')
+      .send({
+        title: 'Jawbreaker',
+        director: 'Darren Stein',
+        year: 1999
+      })
+    
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      title: 'Jawbreaker',
+      director: 'Darren Stein',
+      year: 1999
+    });
   });
 
   it('should be able to get all instances of Movie from movies', async () => {
