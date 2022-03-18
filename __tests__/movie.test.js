@@ -100,6 +100,23 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual(expected);
     expect(await Movie.getById(movie.id)).toEqual(expected);
+
+      const res2 = await request(app)
+      .patch(`/api/v1/movies/${movie.id}`)
+      .send({
+      starring: []
+      });
+    
+    const expected2 = {
+      id: expected.id,
+      title: 'Jawbreaker',
+      director: 'Darren Stein',
+      year: 1999,
+      starring: []
+    }
+    
+    expect(res2.body).toEqual(expected2);
+    expect(await Movie.getById(movie.id)).toEqual(expected2);
   });
 
   it('should be able to delete an instance of Movie by id from movies', async () => {
