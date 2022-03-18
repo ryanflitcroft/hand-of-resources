@@ -15,3 +15,14 @@ INSERT INTO
   movies (title, director, year, starring)
 VALUES
   ('But I''m a Cheerleader', 'Jamie Babbit', 1999, ARRAY ['Natasha Lyonne', 'Clea DuVall', 'Cathy Moriarty', 'RuPaul Charles', 'Mink Stole', 'Bud Cort', 'Eddie Cibrian']);
+
+
+DROP TABLE IF EXISTS animals;
+
+CREATE TABLE animals (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  common_name TEXT NOT NULL,
+  scientific_name TEXT NOT NULL,
+  is_endangered BOOLEAN,
+  conservation_status TEXT
+);
