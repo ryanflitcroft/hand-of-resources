@@ -60,7 +60,18 @@ describe('hand-of-resources routes', () => {
   });
 
   it('should be able to get a single instance of Movie by id from movies', async () => {
+    const movie = await Movie.insert({
+      title: 'Jawbreaker',
+      director: 'Darren Stein',
+      year: 1999
+    });
 
+    const movies = await Movie.getById(movie.id);
+    expect(movies).toEqual({
+      id: expect.any(String),
+      ...movie,
+      starring: expect.any(Array)
+    });
   });
 
   it('should be able to update an instance of Movie by id from movies', async () => {
