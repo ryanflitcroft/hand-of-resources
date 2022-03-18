@@ -20,13 +20,14 @@ describe('hand-of-resources routes', () => {
         title: 'Jawbreaker',
         director: 'Darren Stein',
         year: 1999
-      })
+      });
     
     expect(res.body).toEqual({
       id: expect.any(String),
       title: 'Jawbreaker',
       director: 'Darren Stein',
-      year: 1999
+      year: 1999,
+      starring: expect.any(Array)
     });
   });
 
