@@ -11,7 +11,7 @@ CREATE TABLE movies (
   starring TEXT []
 );
 
--- INSERT INTO
---   movies (title, director, year, starring)
--- VALUES
---   ('But I''m a Cheerleader', 'Jamie Babbit', 1999, '['Natasha Lyonne', 'Clea DuVall', 'Cathy Moriarty', 'RuPaul Charles', 'Mink Stole', 'Bud Cort', 'Eddie Cibrian']')
+INSERT INTO
+  movies (title, director, year, starring)
+VALUES
+  ('But I''m a Cheerleader', 'Jamie Babbit', 1999, ARRAY ['Natasha Lyonne', 'Clea DuVall', 'Cathy Moriarty', 'RuPaul Charles', 'Mink Stole', 'Bud Cort', 'Eddie Cibrian']);
