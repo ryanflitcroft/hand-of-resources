@@ -32,6 +32,30 @@ describe('hand-of-resources routes', () => {
   });
 
   it('should be able to get all instances of Movie from movies', async () => {
+    const movie = await Movie.insert({
+        title: 'Jawbreaker',
+        director: 'Darren Stein',
+        year: 1999
+      })
+    const res = await request(app)
+      .get('/api/v1/movies');
+    
+    expect(res.body).toEqual([
+      {
+        id: expect.any(String),
+        title: 'But I\'m a Cheerleader',
+        director: 'Jamie Babbit',
+        year: 1999,
+        starring: ['Natasha Lyonne', 'Clea DuVall', 'Cathy Moriarty', 'RuPaul Charles', 'Mink Stole', 'Bud Cort', 'Eddie Cibrian']
+      },
+      {
+        id: expect.any(String),
+        title: 'Jawbreaker',
+        director: 'Darren Stein',
+        year: 1999,
+        starring: expect.any(Array)
+      }
+    ]);
 
   });
 
