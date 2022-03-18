@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Movie = require('../lib/models/Movie');
+const req = require('express/lib/request');
 
 describe('hand-of-resources routes', () => {
   beforeEach(() => {
@@ -60,7 +61,16 @@ describe('hand-of-resources routes', () => {
   });
 
   it('should be able to get a single instance of Movie by id from movies', async () => {
+    const movie = await Movie.insert({
+      title: 'Jawbreaker',
+      director: 'Darren Stein',
+      year: 1999
+    });
 
+    const res = await request(app)
+      .get(`/api/v1/movies/${movie.id}`);
+    
+    expect(res.body).toEqual(movie);
   });
 
   it('should be able to update an instance of Movie by id from movies', async () => {
@@ -88,10 +98,21 @@ describe('hand-of-resources routes', () => {
       }
 
     expect(res.body).toEqual(expected);
+    expect(await Movie.getById(movie.id)).toEqual(expected);
   });
 
   it('should be able to delete an instance of Movie by id from movies', async () => {
-
+    const movie = await Movie.insert({
+      title: 'Jawbreaker',
+      director: 'Darren Stein',
+      year: 1999
+    });
+    
+    const res = await request(app)
+      .delete(`/api/v1/movies/${movie.id}`);
+    
+    expect(res.body).toEqual(movie);
+    expect(await Movie.getById(movie.id)).toBe(null);
   });
 
 });
