@@ -75,7 +75,20 @@ describe('hand-of-resources routes', () => {
   });
 
   it('should be able to update an instance of Movie by id from movies', async () => {
+    const movie = await Movie.insert({
+      title: 'Jaw breaker',
+      director: 'Unknown',
+      year: 1000
+    });
 
+    const updatedMovie = await Movie.updateById(movie.id, {
+      title: 'Jawbreaker',
+      director: 'Darren Stein',
+      year: 1999,
+      starring: ['Natasha Lyonne', 'Clea DuVall', 'Cathy Moriarty', 'RuPaul Charles', 'Mink Stole', 'Bud Cort', 'Eddie Cibrian']
+    });
+
+    expect(movie).toEqual(updatedMovie);
   });
 
   it('should be able to delete an instance of Movie by id from movies', async () => {
