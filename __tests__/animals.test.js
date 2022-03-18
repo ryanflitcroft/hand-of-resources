@@ -71,4 +71,28 @@ describe('hand-of-resources routes', () => {
     expect(res.body).toEqual({ ...animal });
   });
 
+  it('should be able to update a single instance of Animal by id from animals', async () => {
+    const animal = await Animal.insert({
+      commonName: 'Bluefin Tuna',
+      scientificName: 'unknown',
+    });
+
+    const res = await request(app)
+      .patch(`/api/v1/animals/${animal.id}`)
+      .send({
+        ...animal,
+        scientificName: 'Thunnus thynnus',
+        isEndangered: true,
+        conservationStatus: 'endangered'
+      });
+    
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      commonName: 'Bluefin Tuna',
+      scientificName: 'Thunnus thynnus',
+      isEndangered: true,
+      conservationStatus: 'endangered'
+    })
+  });
+
 });
