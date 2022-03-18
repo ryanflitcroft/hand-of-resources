@@ -18,7 +18,7 @@ describe('hand-of-resources routes', () => {
       .post('/api/v1/animals')
       .send({
         commonName: 'Bluefin Tuna',
-        scientificName: 'Thunnus Thynnus',
+        scientificName: 'Thunnus thynnus',
         isEndangered: true,
         conservationStatus: 'endangered'
       });
@@ -26,10 +26,37 @@ describe('hand-of-resources routes', () => {
     expect(res.body).toEqual({
       id: expect.any(String),
       commonName: 'Bluefin Tuna',
-      scientificName: 'Thunnus Thynnus',
+      scientificName: 'Thunnus thynnus',
       isEndangered: true,
       conservationStatus: 'endangered'
     })
+  });
+
+  it('should be able to get all instances of Animal from animals', async () => {
+    const animal = await Animal.insert({
+      commonName: 'Bluefin Tuna',
+      scientificName: 'Thunnus thynnus',
+    })
+
+    const res = await request(app)
+      .get('/api/v1/animals');
+
+    expect(res.body).toEqual([
+      {
+        id: expect.any(String),
+        commonName: 'Orangutan',
+        scientificName: 'Pongo abelii, Pongo pygmaeus',
+        isEndangered: true,
+        conservationStatus: 'critically endangered'
+      },
+      {
+        id: expect.any(String),
+        commonName: 'Bluefin Tuna',
+        scientificName: 'Thunnus thynnus',
+        isEndangered: null,
+        conservationStatus: null
+      }
+    ])
   });
 
 });

@@ -26,3 +26,8 @@ CREATE TABLE animals (
   is_endangered BOOLEAN,
   conservation_status TEXT
 );
+
+INSERT INTO
+  animals (common_name, scientific_name, is_endangered, conservation_status)
+VALUES
+  ('Orangutan', 'Pongo abelii, Pongo pygmaeus', true, 'critically endangered');
