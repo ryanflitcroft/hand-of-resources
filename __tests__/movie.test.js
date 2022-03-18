@@ -60,18 +60,7 @@ describe('hand-of-resources routes', () => {
   });
 
   it('should be able to get a single instance of Movie by id from movies', async () => {
-    const movie = await Movie.insert({
-      title: 'Jawbreaker',
-      director: 'Darren Stein',
-      year: 1999
-    });
 
-    const movies = await Movie.getById(movie.id);
-    expect(movies).toEqual({
-      id: expect.any(String),
-      ...movie,
-      starring: expect.any(Array)
-    });
   });
 
   it('should be able to update an instance of Movie by id from movies', async () => {
@@ -81,14 +70,24 @@ describe('hand-of-resources routes', () => {
       year: 1000
     });
 
-    const updatedMovie = await Movie.updateById(movie.id, {
+    const res = await request(app)
+      .patch(`/api/v1/movies/${movie.id}`)
+      .send({
       title: 'Jawbreaker',
       director: 'Darren Stein',
       year: 1999,
       starring: ['Natasha Lyonne', 'Clea DuVall', 'Cathy Moriarty', 'RuPaul Charles', 'Mink Stole', 'Bud Cort', 'Eddie Cibrian']
-    });
+      });
+    
+    const expected = {
+      id: expect.any(String),
+      title: 'Jawbreaker',
+      director: 'Darren Stein',
+      year: 1999,
+      starring: ['Natasha Lyonne', 'Clea DuVall', 'Cathy Moriarty', 'RuPaul Charles', 'Mink Stole', 'Bud Cort', 'Eddie Cibrian']
+      }
 
-    expect(movie).toEqual(updatedMovie);
+    expect(res.body).toEqual(expected);
   });
 
   it('should be able to delete an instance of Movie by id from movies', async () => {
