@@ -59,4 +59,16 @@ describe('hand-of-resources routes', () => {
     ])
   });
 
+  it('should be able to get a single instance of Animal by id from animals', async () => {
+    const animal = await Animal.insert({
+      commonName: 'Bluefin Tuna',
+      scientificName: 'Thunnus thynnus',
+    });
+
+    const res = await request(app)
+      .get(`/api/v1/animals/${animal.id}`);
+    
+    expect(res.body).toEqual({ ...animal });
+  });
+
 });
