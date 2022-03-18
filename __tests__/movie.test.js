@@ -89,6 +89,7 @@ describe('hand-of-resources routes', () => {
       starring: ['Natasha Lyonne', 'Clea DuVall', 'Cathy Moriarty', 'RuPaul Charles', 'Mink Stole', 'Bud Cort', 'Eddie Cibrian']
       });
     
+    
     const expected = {
       id: expect.any(String),
       title: 'Jawbreaker',
