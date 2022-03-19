@@ -16,7 +16,6 @@ INSERT INTO
 VALUES
   ('But I''m a Cheerleader', 'Jamie Babbit', 1999, ARRAY ['Natasha Lyonne', 'Clea DuVall', 'Cathy Moriarty', 'RuPaul Charles', 'Mink Stole', 'Bud Cort', 'Eddie Cibrian']);
 
-
 DROP TABLE IF EXISTS animals;
 
 CREATE TABLE animals (
@@ -53,11 +52,10 @@ CREATE TABLE concerts (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   artist TEXT NOT NULL,
   venue TEXT NOT NULL,
-  calendar DATE NOT NULL,
-  calendar_time time
+  calendar INT NOT NULL
 );
 
 INSERT INTO
-  concerts (artist, venue, calendar, calendar_time)
+  concerts (artist, venue, calendar)
 VALUES
-  ('Cat Power', 'Roseland Theater', '2022-07-22', '20:00:00');
+  ('Cat Power', 'Roseland Theater', 20220722);
