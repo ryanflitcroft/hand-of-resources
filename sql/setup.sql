@@ -31,3 +31,18 @@ INSERT INTO
   animals (common_name, scientific_name, is_endangered, conservation_status)
 VALUES
   ('Orangutan', 'Pongo abelii, Pongo pygmaeus', true, 'critically endangered');
+
+DROP TABLE IF EXISTS artists
+
+CREATE TABLE artists (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name TEXT NOT NULL,
+  born SMALLINT,
+  died SMALLINT,
+  works TEXT []
+);
+
+INSERT INTO
+  artists (name, born, died, works)
+VALUES
+  ('Henri Matisse', 1869, 1954, ARRAY ['Woman with a Hat', 'Still Life with Oranges', 'The Open Window', 'Dance', 'Blue Nude', 'The Joy of Life', 'Green Stripe', 'Woman Reading', 'The Red Room']);
