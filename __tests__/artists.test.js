@@ -79,5 +79,27 @@ describe('hand-of-resources routes', () => {
         works: []
       });
     });
+  
+  it('should be able to update a single instance of Artist by id from artists', async () => {
+    const artist = await Artist.insert({
+      name: 'Frida Kahlo',
+      born: 1907,
+    });
+
+    const res = await request(app)
+      .patch(`/api/v1/artists/${artist.id}`)
+      .send({
+        name: 'Frida Kahlo',
+        born: 1907,
+        died: 1954,
+        works: ['Self-Portrait with Thorn Necklace and Hummingbird', 'The Two Fridas', 'Self Portrait with Cropped Hair', 'Broken Column', 'The Wounded Deer', 'My Grandparents, My Parents, and I', 'Self-Portrait on the Borderline Between Mexico and the United States', 'Frieda and Diego Rivera', 'Without Hope', 'Self-Portrait as a Tehuana']
+      });
+    
+    expect(res.body).toEqual({
+      ...artist,
+      died: 1954,
+      works: ['Self-Portrait with Thorn Necklace and Hummingbird', 'The Two Fridas', 'Self Portrait with Cropped Hair', 'Broken Column', 'The Wounded Deer', 'My Grandparents, My Parents, and I', 'Self-Portrait on the Borderline Between Mexico and the United States', 'Frieda and Diego Rivera', 'Without Hope', 'Self-Portrait as a Tehuana']
+    });
+  });
 
   });
