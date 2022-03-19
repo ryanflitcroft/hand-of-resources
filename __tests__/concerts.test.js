@@ -86,5 +86,19 @@ describe('hand-of-resources routes', () => {
       calendar: 20220414,
     });
   });
+
+  it('should be able to delete an instance of Concert by id from concerts', async () => {
+    const concert = await Concert.insert({
+      artist: 'Girl Talk',
+      venue: 'Crystal Ballroom',
+      calendar: 20220414,
+    });
+
+    const res = await request(app)
+      .delete(`/api/v1/concerts/${concert.id}`);
+    
+    expect(res.body).toEqual({ ...concert });
+    expect(await Concert.getById(concert.id)).toBe(null);
+  });
   
 });
