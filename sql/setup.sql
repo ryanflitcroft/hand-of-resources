@@ -32,12 +32,12 @@ INSERT INTO
 VALUES
   ('Orangutan', 'Pongo abelii, Pongo pygmaeus', true, 'critically endangered');
 
-DROP TABLE IF EXISTS artists
+DROP TABLE IF EXISTS artists;
 
 CREATE TABLE artists (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   name TEXT NOT NULL,
-  born SMALLINT,
+  born SMALLINT NOT NULL,
   died SMALLINT,
   works TEXT []
 );
