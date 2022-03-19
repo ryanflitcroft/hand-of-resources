@@ -46,3 +46,18 @@ INSERT INTO
   artists (name, born, died, works)
 VALUES
   ('Henri Matisse', 1869, 1954, ARRAY ['Woman with a Hat', 'Still Life with Oranges', 'The Open Window', 'Dance', 'Blue Nude', 'The Joy of Life', 'Green Stripe', 'Woman Reading', 'The Red Room']);
+
+DROP TABLE IF EXISTS concerts;
+
+CREATE TABLE concerts (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  artist TEXT NOT NULL,
+  venue TEXT NOT NULL,
+  calendar DATE NOT NULL,
+  calendar_time time
+);
+
+INSERT INTO
+  concerts (artist, venue, calendar, calendar_time)
+VALUES
+  ('Cat Power', 'Roseland Theater', '2022-07-22', '20:00:00');
