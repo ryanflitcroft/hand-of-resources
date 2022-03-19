@@ -31,5 +31,35 @@ describe('hand-of-resources routes', () => {
       works: ['Self-Portrait with Thorn Necklace and Hummingbird', 'The Two Fridas', 'Self Portrait with Cropped Hair', 'Broken Column', 'The Wounded Deer', 'My Grandparents, My Parents, and I', 'Self-Portrait on the Borderline Between Mexico and the United States', 'Frieda and Diego Rivera', 'Without Hope', 'Self-Portrait as a Tehuana']
     });
   });
+
+  it('should be able to get all instances of Artist from artists', async () => {
+    const artist = await Artist.insert({
+      name: 'Frida Kahlo',
+      born: 1907,
+      died: 1954,
+      works: ['Self-Portrait with Thorn Necklace and Hummingbird', 'The Two Fridas', 'Self Portrait with Cropped Hair', 'Broken Column', 'The Wounded Deer', 'My Grandparents, My Parents, and I', 'Self-Portrait on the Borderline Between Mexico and the United States', 'Frieda and Diego Rivera', 'Without Hope', 'Self-Portrait as a Tehuana']
+    });
+
+    const res = await request(app)
+      .get('/api/v1/artists');
+    
+    expect(res.body).toEqual([
+      {
+        id: expect.any(String),
+        name: 'Henri Matisse',
+        born: 1869,
+        died: 1954,
+        works: ['Woman with a Hat', 'Still Life with Oranges', 'The Open Window', 'Dance', 'Blue Nude', 'The Joy of Life', 'Green Stripe', 'Woman Reading', 'The Red Room']
+      },
+      {
+        id: expect.any(String),
+        name: 'Frida Kahlo',
+        born: 1907,
+        died: 1954,
+        works: ['Self-Portrait with Thorn Necklace and Hummingbird', 'The Two Fridas', 'Self Portrait with Cropped Hair', 'Broken Column', 'The Wounded Deer', 'My Grandparents, My Parents, and I', 'Self-Portrait on the Borderline Between Mexico and the United States', 'Frieda and Diego Rivera', 'Without Hope', 'Self-Portrait as a Tehuana']
+      }
+    ]);
+
+  });
   
 });
