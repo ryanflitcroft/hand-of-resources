@@ -64,5 +64,27 @@ describe('hand-of-resources routes', () => {
     
     expect(res.body).toEqual({ ...concert });
   });
+
+  it('should be able to update a single instance of concert by id from concerts', async () => {
+    const concert = await Concert.insert({
+      artist: 'Girl Talk',
+      venue: 'unknown',
+      calendar: 4142022
+    });
+
+    const res = await request(app)
+      .patch(`/api/v1/concerts/${concert.id}`)
+      .send({
+        venue: 'Crystal Ballroom',
+        calendar: 20220414,
+      });
+    
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      artist: 'Girl Talk',
+      venue: 'Crystal Ballroom',
+      calendar: 20220414,
+    });
+  });
   
 });
