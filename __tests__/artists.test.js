@@ -102,4 +102,17 @@ describe('hand-of-resources routes', () => {
     });
   });
 
+  it('should be able to delete a single instance of Artist by id from artists', async () => {
+    const artist = await Artist.insert({
+      name: 'Frida Kahlo',
+      born: 1907
+    });
+
+    const res = await request(app)
+      .delete(`/api/v1/artists/${artist.id}`);
+
+    expect(res.body).toEqual({ ...artist });
+    expect(await Artist.getById(artist.id)).toBe(null);
   });
+
+});
