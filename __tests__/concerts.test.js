@@ -51,5 +51,18 @@ describe('hand-of-resources routes', () => {
       { ...concert }
     ]);
   });
+
+  it('should be able to get a single instance of Concert by id from concerts', async () => {
+    const concert = await Concert.insert({
+      artist: 'Girl Talk',
+      venue: 'Crystal Ballroom',
+      calendar: 20220414,
+    });
+
+    const res = await request(app)
+      .get(`/api/v1/concerts/${concert.id}`);
+    
+    expect(res.body).toEqual({ ...concert });
+  });
   
 });
