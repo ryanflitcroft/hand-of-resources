@@ -64,4 +64,26 @@ describe('hand-of-resources routes', () => {
     expect(res.body).toEqual({ ...musician });
   });
 
+  it('should be able to update a single instance of Musician by id from musicians', async () => {
+    const musician = await Musician.insert({
+      name: 'Ellie Goulding',
+      genres: [],
+      discography: []
+    });
+
+    const res = await request(app)
+      .patch(`/api/v1/musicians/${musician.id}`)
+      .send({
+        genres: ['electropop', 'synth-pop', 'indie pop', 'folktronica'],
+        discography: ['Lights', 'Halcyon', 'Delirium', 'Brightest Blue']
+      });
+    
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      name: 'Ellie Goulding',
+      genres: ['electropop', 'synth-pop', 'indie pop', 'folktronica'],
+      discography: ['Lights', 'Halcyon', 'Delirium', 'Brightest Blue']
+    });
+  });
+
 });
