@@ -3,7 +3,6 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Concert = require('../lib/models/Concert');
-const { insert } = require('../lib/models/Concert');
 
 describe('hand-of-resources routes', () => {
   beforeEach(() => {

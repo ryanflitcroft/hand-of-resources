@@ -59,3 +59,17 @@ INSERT INTO
   concerts (artist, venue, calendar)
 VALUES
   ('Cat Power', 'Roseland Theater', 20220722);
+
+DROP TABLE IF EXISTS musicians;
+
+CREATE TABLE musicians (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name TEXT NOT NULL,
+  genres TEXT [],
+  discography TEXT []
+);
+
+INSERT INTO
+  musicians (name, genres, discography)
+VALUES
+  ('Lissie', ARRAY ['rock', 'pop', 'country', 'folk'], ARRAY ['Catching a Tiger', 'Back to Forever', 'My Wild West', 'Castles']);
