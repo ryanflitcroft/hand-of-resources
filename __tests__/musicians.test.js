@@ -86,4 +86,18 @@ describe('hand-of-resources routes', () => {
     });
   });
 
+  it('should be able to delete a single instance of Musician by id from musicians', async () => {
+    const musician = await Musician.insert({
+      name: 'Ellie Goulding',
+      genres: ['electropop', 'synth-pop', 'indie pop', 'folktronica'],
+      discography: ['Lights', 'Halcyon', 'Delirium', 'Brightest Blue']
+    });
+
+    const res = await request(app)
+      .delete(`/api/v1/musicians/${musician.id}`);
+    
+    expect(res.body).toEqual({ ...musician });
+    expect(await Musician.getById(musician.id)).toBe(null);
+  });
+
 });
